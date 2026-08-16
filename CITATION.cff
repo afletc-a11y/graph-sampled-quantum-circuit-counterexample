@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this result or verification package, please cite it using this metadata."
+title: "An Exact Counterexample to Complete-Graph Gate-Count Extremality in Graph-Sampled Random Quantum Circuits"
+type: software
+authors:
+  - family-names: Fletcher
+    given-names: Austen M.
+version: 0.1.0
+date-released: 2026-08-15
+license: MIT
+abstract: >-
+  Exact rational verification that, for q=t=2 and epsilon=3/13, the
+  graph-sampled architecture on K_3,3 reaches multiplicative-error approximate
+  2-design status after 14 gates, while K_6 requires 15 gates. This gives a
+  finite counterexample to Conjecture 3 of arXiv:2510.23726v2 as literally
+  stated.
+keywords:
+  - random quantum circuits
+  - unitary designs
+  - graph-sampled circuits
+  - multiplicative error
+  - exact verification
+repository-code: "https://github.com/afletc-a11y/graph-sampled-quantum-circuit-counterexample"
