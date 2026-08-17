@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
-"""Independent exact evaluator in the nonorthogonal permutation basis.
+"""Equivalent exact evaluator in the nonorthogonal permutation basis.
 
-For q=2 the two-site Haar projector has the rules
+For q=2 the locally derived two-site Haar-projector rule is
   00 -> 00, 11 -> 11, 01/10 -> (2/5)(00+11).
-This checker never uses the Markov-chain transition or its stationary law.
+
+This is an equivalent reduced representation of the same calculation as
+``exact_markov.py``.  The independent from-definition audit, which solves the
+Gram-projector linear systems rather than inserting the 2/5 rule, is
+``full_eq59_from_definitions.py``.
 """
 
 from __future__ import annotations
