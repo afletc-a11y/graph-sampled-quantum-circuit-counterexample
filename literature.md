@@ -1,6 +1,6 @@
 # Literature and priority audit
 
-Audit date: 2026-08-15.
+Audit updated: 2026-08-17.
 
 ## Primary target
 
@@ -8,21 +8,24 @@ Daniel Belkin, James Allen, and Bryan K. Clark,
 [*Apparent Universal Behavior in Second Moments of Random Quantum Circuits*](https://arxiv.org/abs/2510.23726),
 arXiv:2510.23726v2, revised 2026-07-24.
 
-- Section 2 and Appendix A define multiplicative error and prove Theorem 1,
-  reducing the `t=2` error under local invariance and PSD vectorization to the
-  finite product experiments used here.
+- Section 2 and Appendix A define multiplicative error and prove the finite
+  `t=2` experiment reduction.
 - Section 3 defines graph-sampled architectures as i.i.d. uniform edge choices
   followed by independent Haar-random two-site unitaries.
-- Conjecture 3 says: "No other graph on n qudits forms an epsilon-approximate
-  t-design with fewer gates than the complete graph."
-- Conjecture 4 concerns **connection count**, not gate count.  Appendix B
-  defines it through the maximum connected-block decomposition over equivalent
-  architectures and explicitly says no guaranteed computation is known; the
-  paper's naive and greedy algorithms provide lower bounds only.
+- Conjecture 3 says: "No other graph on n qudits forms an ϵ-approximate
+  t-design with fewer gates than the complete graph, which requires
+  Θ(n log n) gates."
+- Appendix A.5 gives the full `t=2` maximum in Eq. 59; Appendix A.9 proves that
+  a diagonal experiment saturates it for the PSD-vectorized architectures at
+  issue here.
+- Conjecture 4 concerns **connection count**, not gate count, and is separate
+  from this repository's Conjecture 3 certificate.
 
-The target paper itself distinguishes the exact multiplicative error from its
-spectral gap and from anticoncentration.  The certificate in this package
-computes the exact multiplicative error, not either proxy.
+The certificate computes the exact multiplicative error, not a spectral-gap or
+anticoncentration proxy. The trailing asymptotic clause in Conjecture 3 is
+important context: the present result refutes the literal finite gate-count
+extremality statement, while leaving open repaired statements restricted to a
+sufficiently small error regime or an asymptotic interpretation.
 
 ## Directly relevant prior work
 
@@ -30,48 +33,39 @@ Daniel Belkin, James Allen, and Bryan K. Clark,
 [*Absence of censoring inequalities in random quantum circuits*](https://arxiv.org/abs/2502.15995),
 arXiv:2502.15995v2, revised 2025-05-16.
 
-- This is important negative prior art: adding/deleting gates or graph edges
-  need not be monotone for several scrambling measures.
-- For graph-sampled architectures it compares a lollipop graph with a path,
-  first at the spectral-gap level, and uses general inequalities to infer that
-  some additive- and multiplicative-error reversal exists.
-- It does not show that any graph beats the complete graph.  The same authors
-  subsequently stated complete-graph extremality as Conjecture 3 in
-  arXiv:2510.23726v2.
+- Adding/deleting gates or graph edges need not be monotone for several
+  scrambling measures.
+- It does not show that a graph beats the complete graph in the gate-count
+  extremality claim later stated as Conjecture 3.
 
 Daniel Belkin et al.,
 [*Approximate t-designs in generic circuit architectures*](https://arxiv.org/abs/2310.19783),
-arXiv:2310.19783v3, revised 2024-05-17; published as PRX Quantum 5, 040344.
-
-- Relates generic-architecture bounds to connected blocks and spectral gaps.
-- It supplies context for connection-based upper bounds, not an exact
-  multiplicative-error extremality theorem.
+arXiv:2310.19783v3; PRX Quantum 5, 040344.
 
 James Allen, Daniel Belkin, and Bryan K. Clark,
 [*Conditional t-independent spectral gap for random quantum circuits and implications for t-design depths*](https://arxiv.org/abs/2411.13739),
-arXiv:2411.13739v2, revised 2025-02-03.
+arXiv:2411.13739v2.
 
-- Gives strong spectral-gap results and explains their small-epsilon relevance.
-- A gap comparison alone would not establish the finite-error claim attacked
-  here; the present certificate evaluates the full finite-depth error.
+These works provide architecture, connection-count, and spectral-gap context,
+but not this exact finite-error complete-graph counterexample.
 
 ## Follow-up search
 
-Searches were run using:
+Searches through 2026-08-17 used the target title/arXiv identifier, Conjecture 3
+language, and combinations of `complete graph`, `graph-sampled`,
+`multiplicative error`, `K_{3,3}`, `K_{2,2,2}`, `octahedron`, and
+`cocktail-party graph`. No paper or announcement resolving Conjecture 3 or
+giving the present six-qubit witness was located.
 
-- the exact paper title and arXiv identifier;
-- exact language from Conjecture 3;
-- combinations of "complete graph", "graph-sampled", "multiplicative error",
-  and "approximate 2-design";
-- the candidate graph names `K3,3` and `K_{3,3}`.
+The authors have publicly presented the broader work, including the claim that
+the *parallel* complete-graph architecture is not quite the fastest scrambler;
+that is a different architecture/comparison and does not supply the present
+graph-sampled Conjecture 3 counterexample.
 
-No paper or announcement resolving Conjecture 3 or giving this counterexample
-was located.  The latest target version is only three weeks old and continues
-to state the conjecture.  Accordingly, the correct priority language is:
+Accordingly, the appropriate priority language is:
 
-> The exact `K_{3,3}` counterexample appears new in the searched literature as
-> of 2026-08-15, but priority has not yet been confirmed by the authors or peer
-> review.
+> The exact six-qubit graph-sampled counterexample appears new in the searched
+> literature as of 2026-08-17, but priority has not yet been confirmed by the
+> authors or peer review.
 
-This audit does not claim that an unindexed private note or very recent result
-cannot exist.
+This audit cannot exclude unindexed private notes or very recent work.

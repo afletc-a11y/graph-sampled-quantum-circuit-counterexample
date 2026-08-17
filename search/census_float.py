@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Exploratory connected-unlabeled-graph census (not a proof checker).
 
-Dependencies: numpy and networkx.  Exact reconstruction belongs in verify/.
+Dependencies: numpy and networkx. Exact reconstruction belongs in verify/.
 """
 
 from __future__ import annotations
@@ -11,13 +11,11 @@ import numpy as np
 
 
 def stationary(n: int) -> np.ndarray:
-    return np.array(
-        [
-            3 ** (n - x.bit_count())
-            / (2 ** (n - 1) * (2**n + (-1 if x.bit_count() & 1 else 1)))
-            for x in range(1 << n)
-        ]
-    )
+    return np.array([
+        3 ** (n - x.bit_count())
+        / (2 ** (n - 1) * (2**n + (-1 if x.bit_count() & 1 else 1)))
+        for x in range(1 << n)
+    ])
 
 
 def kernel(graph: nx.Graph) -> np.ndarray:
@@ -58,14 +56,12 @@ def main() -> None:
             difference = curve(graph, max_gates) - complete_curve
             gate = int(np.argmin(difference[1:])) + 1
             if difference[gate] < -1e-8:
-                violations.append(
-                    {
-                        "atlas_index_within_n": index,
-                        "gate": gate,
-                        "difference": float(difference[gate]),
-                        "edges": sorted(graph.edges()),
-                    }
-                )
+                violations.append({
+                    "atlas_index_within_n": index,
+                    "gate": gate,
+                    "difference": float(difference[gate]),
+                    "edges": sorted(graph.edges()),
+                })
         print(f"n={n}: {len(graphs)} graphs, {len(violations)} candidates")
         for item in violations:
             print(item)

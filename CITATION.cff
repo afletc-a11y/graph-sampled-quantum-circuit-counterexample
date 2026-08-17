@@ -5,15 +5,20 @@ type: software
 authors:
   - family-names: Fletcher
     given-names: Austen M.
-version: 0.1.0
-date-released: 2026-08-15
+version: 0.2.0
+date-released: 2026-08-17
 license: MIT
 abstract: >-
-  Exact rational verification that, for q=t=2 and epsilon=3/13, the
-  graph-sampled architecture on K_3,3 reaches multiplicative-error approximate
-  2-design status after 14 gates, while K_6 requires 15 gates. This gives a
+  Exact rational verification that, for q=t=2 and epsilon=5/6, the
+  graph-sampled architecture on the six-vertex octahedron K_{2,2,2} reaches
+  multiplicative-error approximate 2-design status after 9 gates, while K_6
+  requires 10 gates. The octahedron has smaller exact multiplicative error
+  than K_6 at gate counts 6 through 15, with the ordering reversing at 16.
+  A separate checker reconstructs the permutation-state Gram matrix and Haar
+  projectors directly and exhaustively evaluates Equation 59. This gives a
   finite counterexample to Conjecture 3 of arXiv:2510.23726v2 as literally
-  stated.
+  stated. Additional exact finite witnesses are recorded at n=7 and n=8, with
+  no general family theorem claimed.
 keywords:
   - random quantum circuits
   - unitary designs

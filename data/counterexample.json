@@ -1,22 +1,397 @@
 {
   "status": "exact counterexample to Conjecture 3 at q=2, t=2",
   "n": 6,
-  "epsilon": {"numerator": 3, "denominator": 13},
+  "primary_epsilon": {
+    "numerator": 5,
+    "denominator": 6
+  },
+  "primary_graph": "K2,2,2",
   "graphs": {
-    "K3,3": {
-      "edges": [[0, 3], [0, 4], [0, 5], [1, 3], [1, 4], [1, 5], [2, 3], [2, 4], [2, 5]],
-      "threshold_gate_count": 14,
+    "K2,2,2": {
+      "description": "octahedron; K6 with perfect matching (0,3),(1,4),(2,5) removed",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "threshold_at_5_over_6": 9,
       "errors": {
-        "13": {"numerator": 274339976596040821, "denominator": 919366980732421875},
-        "14": {"numerator": 79546639693547185219, "denominator": 344762617774658203125}
+        "6": {
+          "numerator": 33599,
+          "denominator": 13500
+        },
+        "7": {
+          "numerator": 670763,
+          "denominator": 405000
+        },
+        "8": {
+          "numerator": 347115007,
+          "denominator": 303750000
+        },
+        "9": {
+          "numerator": 7432619383,
+          "denominator": 9112500000
+        },
+        "10": {
+          "numerator": 164340848531,
+          "denominator": 273375000000
+        },
+        "11": {
+          "numerator": 3742792966739,
+          "denominator": 8201250000000
+        },
+        "12": {
+          "numerator": 87497699793367,
+          "denominator": 246037500000000
+        },
+        "13": {
+          "numerator": 2091179994376783,
+          "denominator": 7381125000000000
+        },
+        "14": {
+          "numerator": 50883397954775963,
+          "denominator": 221433750000000000
+        },
+        "15": {
+          "numerator": 1255671691351725707,
+          "denominator": 6643012500000000000
+        },
+        "16": {
+          "numerator": 31321978687651130143,
+          "denominator": 199290375000000000000
+        }
       }
     },
     "K6": {
-      "edges": [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [1, 2], [1, 3], [1, 4], [1, 5], [2, 3], [2, 4], [2, 5], [3, 4], [3, 5], [4, 5]],
-      "threshold_gate_count": 15,
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "threshold_at_5_over_6": 10,
       "errors": {
-        "14": {"numerator": 61323079873072938701309, "denominator": 263969600200653076171875},
-        "15": {"numerator": 752104047129764606918347, "denominator": 3959544003009796142578125}
+        "6": {
+          "numerator": 688547549,
+          "denominator": 263671875
+        },
+        "7": {
+          "numerator": 6895839979,
+          "denominator": 3955078125
+        },
+        "8": {
+          "numerator": 1778369294789,
+          "denominator": 1483154296875
+        },
+        "9": {
+          "numerator": 18928429830211,
+          "denominator": 22247314453125
+        },
+        "10": {
+          "numerator": 5197395863758829,
+          "denominator": 8342742919921875
+        },
+        "11": {
+          "numerator": 58801416885883483,
+          "denominator": 125141143798828125
+        },
+        "12": {
+          "numerator": 17076032469901475669,
+          "denominator": 46927928924560546875
+        },
+        "13": {
+          "numerator": 40565330678290716119,
+          "denominator": 140783786773681640625
+        },
+        "14": {
+          "numerator": 61323079873072938701309,
+          "denominator": 263969600200653076171875
+        },
+        "15": {
+          "numerator": 752104047129764606918347,
+          "denominator": 3959544003009796142578125
+        },
+        "16": {
+          "numerator": 233071489177475058812811749,
+          "denominator": 1484829001128673553466796875
+        }
+      }
+    },
+    "K3,3": {
+      "role": "secondary earlier witness",
+      "epsilon": {
+        "numerator": 3,
+        "denominator": 13
+      },
+      "edges": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ]
+      ],
+      "threshold_gate_count": 14,
+      "errors": {
+        "13": {
+          "numerator": 274339976596040821,
+          "denominator": 919366980732421875
+        },
+        "14": {
+          "numerator": 79546639693547185219,
+          "denominator": 344762617774658203125
+        }
+      }
+    }
+  },
+  "primary_depth_9_interval": {
+    "lower": {
+      "numerator": 7432619383,
+      "denominator": 9112500000
+    },
+    "upper_exclusive": {
+      "numerator": 18928429830211,
+      "denominator": 22247314453125
+    },
+    "width": {
+      "numerator": 8345455089959,
+      "denominator": 237304687500000
+    }
+  },
+  "octahedron_beats_K6_through_45_exactly_at": [
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "n8_supporting_evidence": {
+    "graph": "cocktail-party graph CP8 = K8 minus a perfect matching",
+    "claim_scope": "evidence only, not a general family theorem",
+    "beats_K8_at": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "key_errors": {
+      "CP8_16": {
+        "numerator": 37222906637142989511155183,
+        "denominator": 65303470080000000000000000
+      },
+      "K8_16": {
+        "numerator": 4008961629021877754048110238049,
+        "denominator": 6945004265973760000000000000000
+      },
+      "CP8_17": {
+        "numerator": 6062032651990349691461374520233,
+        "denominator": 12853682015846400000000000000000
+      },
+      "K8_17": {
+        "numerator": 229123049355054299943024454340127,
+        "denominator": 486150298618163200000000000000000
+      }
+    },
+    "verification_note": "exact Markov curve plus exact permutation-basis comparisons at s=6,16,17 for CP8 and K8"
+  },
+  "n7_supporting_evidence": {
+    "claim_scope": "finite supporting evidence only, not a general family theorem",
+    "K7_minus_C7": {
+      "description": "K7 with Hamiltonian cycle (0,1),(1,2),(2,3),(3,4),(4,5),(5,6),(0,6) removed",
+      "beats_K7_at_within_checked_range_through_15": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "widest_sub1_interval_at_s": 11,
+      "interval": {
+        "lower": {
+          "numerator": 12179988456128649,
+          "denominator": 13792736767578125
+        },
+        "upper_exclusive": {
+          "numerator": 2427499625871482657,
+          "denominator": 2585547026630859375
+        },
+        "width": {
+          "numerator": 5049582644841826906,
+          "denominator": 90494145932080078125
+        }
+      }
+    },
+    "K7_minus_C3_union_C4": {
+      "description": "K7 with disjoint cycles C3 on 0,1,2 and C4 on 3,4,5,6 removed",
+      "beats_K7_at_within_checked_range_through_15": [
+        12,
+        13,
+        14
+      ],
+      "key_errors": {
+        "graph_12": {
+          "numerator": 9348456246651479627,
+          "denominator": 13034136245361328125
+        },
+        "K7_12": {
+          "numerator": 195477831642334452857,
+          "denominator": 271482437796240234375
+        },
+        "graph_14": {
+          "numerator": 143364438744128662225007,
+          "denominator": 335303154911920166015625
+        },
+        "K7_14": {
+          "numerator": 9326841828865675164832799,
+          "denominator": 20951657136924840087890625
+        }
       }
     }
   }

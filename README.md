@@ -1,100 +1,195 @@
-# Complete-graph extremality for graph-sampled random quantum circuits
+# Complete-graph extremality counterexample for graph-sampled random quantum circuits
 
 [![Verify exact certificate](https://github.com/afletc-a11y/graph-sampled-quantum-circuit-counterexample/actions/workflows/verify.yml/badge.svg)](https://github.com/afletc-a11y/graph-sampled-quantum-circuit-counterexample/actions/workflows/verify.yml)
 
 ## Result
 
-Conjecture 3 of Belkin--Allen--Clark, *Apparent Universal Behavior in
-Second Moments of Random Quantum Circuits* (arXiv:2510.23726v2), is false as
-literally stated.  A six-qubit counterexample already occurs at
+Conjecture 3 of Belkin--Allen--Clark, *Apparent Universal Behavior in Second
+Moments of Random Quantum Circuits* (arXiv:2510.23726v2), is false as literally
+stated. A six-qubit counterexample occurs already at
 
 \[
-q=t=2,\qquad \epsilon=\frac{3}{13}.
+q=t=2,\qquad \epsilon=\frac56.
 \]
 
-For the graph-sampled architecture that chooses an edge uniformly and applies
-an independent Haar-random two-qubit gate,
+Let `K_{2,2,2}` denote the octahedron graph, equivalently `K_6` with a perfect
+matching removed. For the graph-sampled architecture that chooses an edge
+uniformly and applies an independent Haar-random two-qubit gate,
 
 \[
-s_{3/13}(K_{3,3})=14 < 15=s_{3/13}(K_6).
+s_{5/6}(K_{2,2,2})=9 < 10=s_{5/6}(K_6).
 \]
 
-Thus a connected graph other than the complete graph reaches the specified
-multiplicative-error approximate 2-design threshold with one fewer gate.
+The exact depth-9 errors are
 
-The result is an exact finite calculation, not floating-point evidence.  The
-trusted checker uses only integer arithmetic and `fractions.Fraction` from the
-Python standard library.
+\[
+M_{K_{2,2,2}}(9)=\frac{7432619383}{9112500000},\qquad
+M_{K_6}(9)=\frac{18928429830211}{22247314453125}.
+\]
 
-## Verify
+Thus every
 
-From this directory, run:
+\[
+\epsilon\in
+\left[
+\frac{7432619383}{9112500000},
+\frac{18928429830211}{22247314453125}
+\right)
+\]
+
+gives the same one-gate reversal `s_epsilon(K_{2,2,2})=9 < 10=s_epsilon(K_6)`.
+The interval has exact width
+
+\[
+\frac{8345455089959}{237304687500000}
+\approx 0.0351676791.
+\]
+
+The octahedron actually has smaller exact multiplicative error than `K_6` at
+every gate count `s=6,...,15`, with the ordering reversing at `s=16`. The
+widest finite-depth error window occurs at `s=6`, but that interval lies
+entirely above `epsilon=1`:
+
+\[
+\left[\frac{33599}{13500},\frac{688547549}{263671875}\right).
+\]
+
+The earlier `K_{3,3}` witness remains valid but is weaker: it beats `K_6` only
+at `s=14` (through the checked range `s<=45`).
+
+## Verification
+
+The core certificate uses exact integer/rational arithmetic only.
+
+Run:
 
 ```bash
 python3 verify/verify_counterexample.py
 ```
 
-Expected first three lines:
+This checks the `epsilon=5/6` threshold, the exact values at `s=8,9,10`, the
+full octahedron-vs-`K_6` crossover through `s=45`, and the older `K_{3,3}`
+example.
 
-```text
-PASS
-s_(3/13)(K_3,3) = 14
-s_(3/13)(K_6)   = 15
+For a direct audit from the paper's permutation-state definitions, run:
+
+```bash
+python3 verify/full_eq59_from_definitions.py
 ```
 
-For a stronger cross-check using two independent exact representations, run:
+That checker independently constructs the `64 x 64` permutation-state Gram
+matrix, constructs every two-site Haar moment operator as the `G`-orthogonal
+projector onto the equality subspace, constructs the global Haar projector,
+converts the coordinate action to the coefficient matrix used in Eq. 59, and
+exhaustively evaluates all `64^2=4096` `(a,b)` experiments. It verifies the
+full Eq. 59 maximum at every depth `s=6,...,16` for both the octahedron and
+`K_6`.
+
+Two faster exact evaluators are also retained:
 
 ```bash
 python3 verify/crosscheck.py
 ```
 
-This compares the parity-conditioned heat-bath evaluator with a separate
-permutation-basis Haar-projector evaluator on complete graphs, paths, cycles,
-and stars for `n=2,...,7` and gate counts `0,...,8`.
+They are **equivalent representations/reductions** of the same `q=t=2`
+calculation (a parity-conditioned heat-bath chain and a nonorthogonal
+permutation-basis transfer rule), not independent derivations. The
+from-definition Eq. 59 checker above is the independent audit layer.
 
-GitHub Actions runs both commands automatically on every push and pull request.
-
-## Optional exploratory census
-
-The proof and trusted checker have no third-party dependencies. To rerun the
-floating-point graph census used to locate candidates:
+Additional finite witnesses can be checked with:
 
 ```bash
-python3 -m pip install -r requirements-search.txt
-python3 search/census_float.py
+python3 verify/n7_witnesses.py
+python3 verify/cocktail_party_n8.py
 ```
 
-The census is exploratory only and is not used by the proof.
+At `n=7`, `K_7-C_7` beats `K_7` at `s=6,...,14`, while
+`K_7-(C_3\sqcup C_4)` beats `K_7` at `s=12,13,14` (within the exact checked
+range through `s=15`). The strongest sub-1 window found among these is for
+`K_7-C_7` at `s=11`:
+
+\[
+\left[
+\frac{12179988456128649}{13792736767578125},
+\frac{2427499625871482657}{2585547026630859375}
+\right),
+\]
+
+of width
+
+\[
+\frac{5049582644841826906}{90494145932080078125}
+\approx 0.0558001028.
+\]
+
+This is about `1.5867x` the width of the octahedron's widest sub-1 interval,
+but the octahedron remains the primary witness because it occurs already at
+`n=6`, has the simple `epsilon=5/6` certificate, and its reversal persists to
+much lower error (`M_{O_6}(15)\approx0.189` versus
+`M_{K_7-C_7}(14)\approx0.432`).
+
+At `n=8`, the cocktail-party graph `K_8` minus a perfect matching beats `K_8`
+at `s=6,...,16` and loses again at `s=17`. The `n=8` checker now explicitly
+compares the heat-bath and permutation-basis exact reductions at `s=6,16,17`,
+so this system size is no longer supported by only one reduced
+representation.
+
+These `n=7,8` examples are supporting finite evidence, **not** a claimed
+general family theorem.
+
+GitHub Actions runs the exact verification suite on every push and pull
+request.
 
 ## Files
 
-- `proof.md`: derivation from the paper's exact multiplicative-error formula.
-- `STATUS.md`: what is proved, audited, and still open.
-- `verify/verify_counterexample.py`: minimal trusted checker.
-- `verify/exact_markov.py`: reusable exact heat-bath evaluator.
-- `verify/exact_permutation.py`: independent exact permutation-basis evaluator.
-- `verify/crosscheck.py`: boundary and named-family cross-checks.
-- `data/counterexample.json`: edge lists and exact rational outputs.
+- `proof.md`: derivation and exact certificate.
+- `STATUS.md`: what is proved, independently audited, exploratory, and open.
+- `verify/verify_counterexample.py`: compact exact primary certificate.
+- `verify/full_eq59_from_definitions.py`: independent full-Eq.-59 audit from
+  the paper's Gram/projector definitions.
+- `verify/exact_markov.py`: exact heat-bath reduction.
+- `verify/exact_permutation.py`: equivalent exact permutation-basis reduction.
+- `verify/crosscheck.py`: agreement checks between the two reduced evaluators.
+- `verify/n7_witnesses.py`: exact `n=7` supporting witnesses and selected
+  reduced-representation cross-checks.
+- `verify/cocktail_party_n8.py`: exact `n=8` supporting evidence with explicit
+  `n=8` reduced-representation cross-checks.
+- `data/counterexample.json`: graph definitions and exact rational outputs.
 - `search/census_float.py`: exploratory unlabeled-graph search, clearly
   separated from the proof.
-- `requirements-search.txt`: optional dependencies for the exploratory census.
-- `literature.md`: source and priority audit through 2026-08-15.
+- `requirements-search.txt`: optional dependencies for exploratory search only.
+- `literature.md`: source and priority audit.
 - `.github/workflows/verify.yml`: continuous exact verification.
 - `CITATION.cff`: citation metadata.
 - `LICENSE`: MIT license.
 
-## Scope
+## Scope and caveats
 
-This refutes Conjecture 3 because that conjecture quantifies over all graphs,
-qudit dimensions, design orders, and errors; one `q=t=2` instance suffices.
-It does **not** disprove a possible repaired statement restricted to a fixed
-small error such as `0.01`, to sufficiently small error, or to asymptotic
-leading-order gate counts.  Conjecture 4, involving exact connection count,
-is not addressed here.
+One finite instance is enough to refute Conjecture 3 as written. This result
+does **not** show that deleting a perfect matching is always beneficial, nor
+that any simple deletion rule gives a counterexample family.
+
+The exploratory `n=6,7` census gives a suggestive but non-theorem pattern: all
+four candidates it finds are `K_n` with a spanning subgraph of maximum degree
+at most two deleted (`K_6` minus a perfect matching, `K_6-(C_3\sqcup C_3)`,
+`K_7-C_7`, and `K_7-(C_3\sqcup C_4)`). The naive converse already fails in
+the same search: `K_6-C_6` (the triangular prism) does not produce a reversal
+in the census range. This is recorded only as a direction for further search.
+
+The advantage is an intermediate-depth/intermediate-error effect. `K_6`
+retakes the exact finite-depth lead at `s=16` and remains ahead through the
+checked range `s<=45`. Numerically, its subleading decay mode is also smaller,
+so the long-time/sufficiently-small-error regime favors the complete graph.
+The repository does not promote that numerical spectral observation to a new
+standalone theorem.
+
+Conjecture 4 is separate. The valid `q=5,n=3` path-versus-triangle
+counterexample is not packaged here, and later candidate witnesses at `q=15`
+and `q=29` should not be promoted until they receive the same independent
+full-Eq.-59 audit.
 
 ## Citation and research status
 
-Citation metadata is provided in `CITATION.cff`. The result is an exact,
-independently cross-checked computational counterexample, but it has not yet
-been peer reviewed. The searched literature and current priority assessment
-are recorded in `literature.md`.
+Citation metadata is provided in `CITATION.cff`. The counterexample is exact
+and mechanically reproducible, but it has not yet been peer reviewed. See
+`literature.md` for the searched literature and priority caveat.
