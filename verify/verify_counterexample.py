@@ -86,6 +86,11 @@ def main() -> None:
     assert oct_curve[8][0] > EPSILON > oct_curve[9][0]
     assert k6_curve[9][0] > EPSILON > k6_curve[10][0]
 
+    # Certify the threshold definitions directly: these are the first
+    # gate counts at which the error is at most epsilon = 5/6.
+    assert min(s for s in range(1, 46) if oct_curve[s][0] <= EPSILON) == 9
+    assert min(s for s in range(1, 46) if k6_curve[s][0] <= EPSILON) == 10
+
     oct_hits = [s for s in range(1, 46) if oct_curve[s][0] < k6_curve[s][0]]
     k33_hits = [s for s in range(1, 46) if k33_curve[s][0] < k6_curve[s][0]]
     assert oct_hits == list(range(6, 16)), oct_hits
