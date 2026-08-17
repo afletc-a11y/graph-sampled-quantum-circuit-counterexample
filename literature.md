@@ -12,8 +12,9 @@ arXiv:2510.23726v2, revised 2026-07-24.
   `t=2` experiment reduction.
 - Section 3 defines graph-sampled architectures as i.i.d. uniform edge choices
   followed by independent Haar-random two-site unitaries.
-- Conjecture 3 says: "No other graph on n qudits forms an epsilon-approximate
-  t-design with fewer gates than the complete graph."
+- Conjecture 3 says: "No other graph on n qudits forms an ϵ-approximate
+  t-design with fewer gates than the complete graph, which requires
+  Θ(n log n) gates."
 - Appendix A.5 gives the full `t=2` maximum in Eq. 59; Appendix A.9 proves that
   a diagonal experiment saturates it for the PSD-vectorized architectures at
   issue here.
@@ -21,7 +22,10 @@ arXiv:2510.23726v2, revised 2026-07-24.
   from this repository's Conjecture 3 certificate.
 
 The certificate computes the exact multiplicative error, not a spectral-gap or
-anticoncentration proxy.
+anticoncentration proxy. The trailing asymptotic clause in Conjecture 3 is
+important context: the present result refutes the literal finite gate-count
+extremality statement, while leaving open repaired statements restricted to a
+sufficiently small error regime or an asymptotic interpretation.
 
 ## Directly relevant prior work
 

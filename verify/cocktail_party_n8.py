@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Exact supporting evidence for the n=8 cocktail-party graph.
 
-This is deliberately not advertised as a general family theorem.  It uses the
-exact heat-bath reduction already cross-checked against the permutation-basis
-representation and checks only the finite n=8 claim.
+This is deliberately not advertised as a general family theorem.  The full
+curve is computed with the exact heat-bath reduction, and representative
+points at n=8 are checked independently against the equivalent exact
+permutation-basis reduction.
 """
 
 from __future__ import annotations
@@ -12,6 +13,7 @@ from fractions import Fraction as F
 from itertools import combinations
 
 from exact_markov import _step_integer, stationary_probability, validate_graph
+from exact_permutation import _step_integer as permutation_step_integer
 
 N = 8
 K8 = list(combinations(range(N), 2))
@@ -48,6 +50,30 @@ def curve(edges, smax=17):
     return out
 
 
+
+def permutation_selected(edges, depths=(6, 16, 17)):
+    """Permutation-basis maxima at selected depths in one evolution pass."""
+    depths = tuple(sorted(depths))
+    scale0 = 5 * len(edges)
+    values = {s: [] for s in depths}
+    for experiment in range(1 << N):
+        character = [
+            -1 if (experiment & state).bit_count() & 1 else 1
+            for state in range(1 << N)
+        ]
+        vector = character[:]
+        scale = 1
+        k = experiment.bit_count()
+        parity_sign = -1 if k & 1 else 1
+        prefactor = F(2**N + parity_sign, 2 * 3 ** (N - k))
+        for s in range(1, max(depths) + 1):
+            vector = permutation_step_integer(N, edges, vector)
+            scale *= scale0
+            if s in values:
+                quadratic = sum(x * y for x, y in zip(character, vector))
+                values[s].append(prefactor * F(quadratic, scale) - 1)
+    return {s: max(v) for s, v in values.items()}
+
 def main() -> None:
     cp = curve(CP8)
     k8 = curve(K8)
@@ -58,7 +84,17 @@ def main() -> None:
         assert actual == expected, (name, s, actual, expected)
     assert cp[16][0] < k8[16][0]
     assert cp[17][0] > k8[17][0]
+
+    # The general reduced-representation cross-check only covers n<=7, so
+    # explicitly validate n=8 at the start of the winning regime and on both
+    # sides of the crossover.
+    for name, edges, curve_values in (("CP8", CP8, cp), ("K8", K8, k8)):
+        perm = permutation_selected(edges)
+        for s in (6, 16, 17):
+            assert perm[s] == curve_values[s][0], (name, s, curve_values[s][0], perm[s])
+
     print("PASS: CP8 beats K8 exactly at s=6,...,16 among s<=17")
+    print("PASS: n=8 Markov/permutation cross-checks at s=6,16,17")
     print(f"s=16: CP8={cp[16][0]} < K8={k8[16][0]}")
     print(f"s=17: CP8={cp[17][0]} > K8={k8[17][0]}")
     print("Evidence at n=8 only; no general family theorem is claimed.")

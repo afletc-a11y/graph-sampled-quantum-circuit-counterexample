@@ -97,17 +97,59 @@ octahedron's epsilon window is wider by the exact factor
 \approx1.5928331073.
 \]
 
-## Supporting n=8 evidence
+## Additional exact finite witnesses
 
-An independent exact reduced calculation verifies that the cocktail-party
-graph on eight vertices (`K_8` minus a perfect matching) satisfies
+The exploratory census also led to two seven-vertex witnesses, subsequently
+checked in exact rational arithmetic:
+
+\[
+M_{K_7-C_7}(s)<M_{K_7}(s)\quad\text{for }s=6,\ldots,14,
+\]
+
+and
+
+\[
+M_{K_7-(C_3\sqcup C_4)}(s)<M_{K_7}(s)
+\quad\text{for }s=12,13,14,
+\]
+
+within the exact checked range through `s=15`. For `K_7-C_7`, the widest
+sub-1 interval occurs at `s=11`:
+
+\[
+\left[
+\frac{12179988456128649}{13792736767578125},
+\frac{2427499625871482657}{2585547026630859375}
+\right),
+\]
+
+with exact width
+
+\[
+\frac{5049582644841826906}{90494145932080078125}
+\approx0.0558001028.
+\]
+
+This interval is about `1.5867x` as wide as the octahedron's widest sub-1
+interval. The octahedron remains the primary witness because it already occurs
+at `n=6`, admits the particularly clean `epsilon=5/6` threshold certificate,
+and continues beating `K_6` down to substantially smaller multiplicative
+errors (its `s=15` lower endpoint is about `0.189`, compared with about `0.432`
+for `K_7-C_7` at `s=14`).
+
+At `n=8`, an exact reduced calculation verifies that the cocktail-party graph
+(`K_8` minus a perfect matching) satisfies
 
 \[
 M_{CP_8}(s)<M_{K_8}(s)\quad\text{for }s=6,\ldots,16,
 \]
 
-and loses again at `s=17`. This is recorded as evidence only. No theorem is
-claimed for general even `n`.
+and loses again at `s=17`. The `n=8` checker explicitly compares the Markov
+and permutation-basis reductions at `s=6,16,17`; this system size therefore no
+longer rests on a single unchecked reduced representation.
+
+All of these are recorded as finite supporting evidence only. No general
+cocktail-party or deletion-family theorem is claimed.
 
 ## Equivalent reduced representations
 
@@ -119,8 +161,21 @@ the independent audit.
 ## Exploratory only
 
 The NetworkX/NumPy graph census is candidate-generation code, not part of the
-proof. Numerical spectral observations suggest `K_6` has the better long-time
-decay rate; the exact certificate itself only needs the finite-depth values.
+proof. Among the four `n=6,7` candidates it returns, every graph can be written
+as `K_n-H` where `H` is spanning and has maximum degree at most two:
+
+- `K_6` minus a perfect matching;
+- `K_6-(C_3\sqcup C_3)=K_{3,3}`;
+- `K_7-C_7`;
+- `K_7-(C_3\sqcup C_4)`.
+
+This is only a search heuristic, not a characterization. The simplest converse
+already fails in the same census: `K_6-C_6` (the triangular prism) is also the
+complement of a spanning 2-regular graph but is not returned as a complete-
+graph reversal in the searched range.
+
+Numerical spectral observations suggest `K_6` has the better long-time decay
+rate; the exact primary certificate itself only needs the finite-depth values.
 
 ## Not addressed
 

@@ -96,16 +96,46 @@ calculation (a parity-conditioned heat-bath chain and a nonorthogonal
 permutation-basis transfer rule), not independent derivations. The
 from-definition Eq. 59 checker above is the independent audit layer.
 
-Finally,
+Additional finite witnesses can be checked with:
 
 ```bash
+python3 verify/n7_witnesses.py
 python3 verify/cocktail_party_n8.py
 ```
 
-checks the supporting `n=8` observation exactly: the cocktail-party graph
-`K_8` minus a perfect matching beats `K_8` at `s=6,...,16` and loses again at
-`s=17`. This is evidence for a pattern at `n=6,8`, **not** a claimed general
-family theorem.
+At `n=7`, `K_7-C_7` beats `K_7` at `s=6,...,14`, while
+`K_7-(C_3\sqcup C_4)` beats `K_7` at `s=12,13,14` (within the exact checked
+range through `s=15`). The strongest sub-1 window found among these is for
+`K_7-C_7` at `s=11`:
+
+\[
+\left[
+\frac{12179988456128649}{13792736767578125},
+\frac{2427499625871482657}{2585547026630859375}
+\right),
+\]
+
+of width
+
+\[
+\frac{5049582644841826906}{90494145932080078125}
+\approx 0.0558001028.
+\]
+
+This is about `1.5867x` the width of the octahedron's widest sub-1 interval,
+but the octahedron remains the primary witness because it occurs already at
+`n=6`, has the simple `epsilon=5/6` certificate, and its reversal persists to
+much lower error (`M_{O_6}(15)\approx0.189` versus
+`M_{K_7-C_7}(14)\approx0.432`).
+
+At `n=8`, the cocktail-party graph `K_8` minus a perfect matching beats `K_8`
+at `s=6,...,16` and loses again at `s=17`. The `n=8` checker now explicitly
+compares the heat-bath and permutation-basis exact reductions at `s=6,16,17`,
+so this system size is no longer supported by only one reduced
+representation.
+
+These `n=7,8` examples are supporting finite evidence, **not** a claimed
+general family theorem.
 
 GitHub Actions runs the exact verification suite on every push and pull
 request.
@@ -120,7 +150,10 @@ request.
 - `verify/exact_markov.py`: exact heat-bath reduction.
 - `verify/exact_permutation.py`: equivalent exact permutation-basis reduction.
 - `verify/crosscheck.py`: agreement checks between the two reduced evaluators.
-- `verify/cocktail_party_n8.py`: exact `n=8` supporting evidence.
+- `verify/n7_witnesses.py`: exact `n=7` supporting witnesses and selected
+  reduced-representation cross-checks.
+- `verify/cocktail_party_n8.py`: exact `n=8` supporting evidence with explicit
+  `n=8` reduced-representation cross-checks.
 - `data/counterexample.json`: graph definitions and exact rational outputs.
 - `search/census_float.py`: exploratory unlabeled-graph search, clearly
   separated from the proof.
@@ -134,7 +167,14 @@ request.
 
 One finite instance is enough to refute Conjecture 3 as written. This result
 does **not** show that deleting a perfect matching is always beneficial, nor
-that the cocktail-party graphs form a counterexample family.
+that any simple deletion rule gives a counterexample family.
+
+The exploratory `n=6,7` census gives a suggestive but non-theorem pattern: all
+four candidates it finds are `K_n` with a spanning subgraph of maximum degree
+at most two deleted (`K_6` minus a perfect matching, `K_6-(C_3\sqcup C_3)`,
+`K_7-C_7`, and `K_7-(C_3\sqcup C_4)`). The naive converse already fails in
+the same search: `K_6-C_6` (the triangular prism) does not produce a reversal
+in the census range. This is recorded only as a direction for further search.
 
 The advantage is an intermediate-depth/intermediate-error effect. `K_6`
 retakes the exact finite-depth lead at `s=16` and remains ahead through the

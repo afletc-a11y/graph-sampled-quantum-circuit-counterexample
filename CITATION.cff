@@ -17,7 +17,8 @@ abstract: >-
   A separate checker reconstructs the permutation-state Gram matrix and Haar
   projectors directly and exhaustively evaluates Equation 59. This gives a
   finite counterexample to Conjecture 3 of arXiv:2510.23726v2 as literally
-  stated.
+  stated. Additional exact finite witnesses are recorded at n=7 and n=8, with
+  no general family theorem claimed.
 keywords:
   - random quantum circuits
   - unitary designs

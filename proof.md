@@ -226,7 +226,36 @@ At that depth the octahedron's reversal interval is wider by
 
 This is why `O_6` is the primary witness in the repository.
 
-## 7. Supporting cocktail-party evidence at n=8
+## 7. Additional exact finite witnesses
+
+Two additional seven-vertex witnesses were found by the exploratory census
+and then checked exactly. The first is `K_7-C_7`, which satisfies
+
+\[
+M_{K_7-C_7}(s)<M_{K_7}(s)\qquad(s=6,\ldots,14),
+\]
+
+within the exact checked range through `s=15`. Its widest sub-1 interval is at
+`s=11`:
+
+\[
+\left[
+\frac{12179988456128649}{13792736767578125},
+\frac{2427499625871482657}{2585547026630859375}
+\right),
+\]
+
+with exact width
+
+\[
+\frac{5049582644841826906}{90494145932080078125}.
+\]
+
+The second is `K_7-(C_3\sqcup C_4)`, which beats `K_7` at `s=12,13,14`
+within the same checked range. The first interval is about `1.5867x` wider than
+the octahedron's widest sub-1 interval, but the octahedron is retained as the
+primary witness because it occurs at smaller `n`, gives the clean `5/6`
+certificate, and reaches a substantially lower-error reversal regime.
 
 The exact reduced evaluator also checks the cocktail-party graph `CP_8`,
 `K_8` with a perfect matching removed. It finds
@@ -248,8 +277,15 @@ M_{CP_8}(16)=
 
 whereas the inequality reverses at `s=17`.
 
-This is evidence at `n=6` and `n=8` only. No general cocktail-party-family
-theorem is claimed.
+The `n=8` checker explicitly compares the Markov and permutation-basis
+reductions at `s=6,16,17`. These additional `n=7,8` examples are finite
+evidence only; no general cocktail-party or deletion-family theorem is
+claimed.
+
+The four `n=6,7` census hits share a suggestive structural feature: each is
+`K_n-H` for a spanning deleted graph `H` of maximum degree at most two. This is
+not a characterization. In particular `K_6-C_6` has the same broad form but
+does not appear as a reversal in the exploratory census range.
 
 ## 8. Verification architecture
 
