@@ -1,0 +1,30 @@
+name: Verify exact certificate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Primary exact certificate
+        run: python3 verify/verify_counterexample.py
+
+      - name: Equivalent reduced-representation cross-check
+        run: python3 verify/crosscheck.py
+
+      - name: Independent full Eq. 59 audit from definitions
+        run: python3 verify/full_eq59_from_definitions.py
+
+      - name: Exact n=7 supporting evidence
+        run: python3 verify/n7_witnesses.py
+
+      - name: Exact n=8 supporting evidence
+        run: python3 verify/cocktail_party_n8.py
